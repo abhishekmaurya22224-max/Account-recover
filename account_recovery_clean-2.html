@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Account Recovery</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background: #f5f5f5;
+    min-height: 100vh;
+}
+
+.page {
+    width: 100%;
+    max-width: 430px;
+    min-height: 100vh;
+    margin: auto;
+    background: #fff;
+    padding: 35px 25px;
+}
+
+/* Instagram-style logo */
+.logo {
+    width: 120px;
+    height: 120px;
+    margin: 40px auto 25px;
+    border-radius: 30px;
+    background: linear-gradient(
+        135deg,
+        #833ab4,
+        #c13584,
+        #e1306c,
+        #f77737,
+        #fcaf45
+    );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.camera {
+    width: 72px;
+    height: 72px;
+    border: 7px solid #fff;
+    border-radius: 22px;
+    position: relative;
+}
+
+.camera::before {
+    content: "";
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    border: 6px solid #fff;
+    border-radius: 50%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.camera::after {
+    content: "";
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    background: #fff;
+    border-radius: 50%;
+    right: 7px;
+    top: 7px;
+}
+
+h1 {
+    text-align: center;
+    color: #e00000;
+    font-size: 29px;
+    line-height: 1.15;
+    margin-bottom: 45px;
+}
+
+.form-group {
+    margin-bottom: 22px;
+}
+
+label {
+    display: block;
+    font-size: 19px;
+    font-weight: 500;
+    margin-bottom: 9px;
+}
+
+input,
+textarea {
+    width: 100%;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    padding: 15px;
+    font-size: 17px;
+    outline: none;
+}
+
+input {
+    height: 60px;
+}
+
+textarea {
+    height: 100px;
+    resize: none;
+}
+
+input:focus,
+textarea:focus {
+    border-color: #777;
+}
+
+.submit-btn {
+    width: 100%;
+    height: 58px;
+    border: 0;
+    border-radius: 8px;
+    background: linear-gradient(
+        90deg,
+        #833ab4,
+        #e1306c,
+        #f77737
+    );
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.submit-btn:active {
+    transform: scale(.98);
+}
+
+/* Success page */
+#successPage {
+    display: none;
+    text-align: center;
+}
+
+.success-icon {
+    width: 105px;
+    height: 105px;
+    border-radius: 50%;
+    background: #00b84f;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 60px;
+    margin: 150px auto 50px;
+    box-shadow: 0 8px 25px rgba(0, 184, 79, .20);
+}
+
+.success-title {
+    color: #00a94b;
+    font-size: 30px;
+    margin-bottom: 30px;
+}
+
+.success-text {
+    color: #555;
+    font-size: 17px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.back-btn {
+    margin-top: 25px;
+    width: 100%;
+    height: 52px;
+    border: 0;
+    border-radius: 8px;
+    background: #eee;
+    color: #333;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.footer {
+    margin-top: 40px;
+    text-align: center;
+    color: #888;
+    font-size: 12px;
+    line-height: 1.5;
+}
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+    <!-- RECOVERY PAGE -->
+    <section id="recoveryPage">
+
+        <div class="logo">
+            <div class="camera"></div>
+        </div>
+
+        <h1>Disable Suspended<br>Recovery</h1>
+
+        <form id="recoveryForm">
+
+            <div class="form-group">
+                <label>Full Name</label>
+                <input
+                    type="text"
+                    placeholder="Enter your full name"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label>Username</label>
+                <input
+                    type="text"
+                    placeholder="@username"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label>Reason</label>
+                <textarea
+                    placeholder="Explain the issue with your account..."
+                    required
+                ></textarea>
+            </div>
+
+            <button class="submit-btn" type="submit">
+                Submit Appeal
+            </button>
+
+        </form>
+
+        <div class="footer">
+            Unofficial educational demonstration.<br>
+            This page is not affiliated with Instagram.
+        </div>
+
+    </section>
+
+
+    <!-- SUCCESS PAGE -->
+    <section id="successPage">
+
+        <div class="success-icon">✓</div>
+
+        <h2 class="success-title">
+            Request Submitted!
+        </h2>
+
+        <p class="success-text">
+            Your recovery request has been submitted
+            successfully.
+            <br><br>
+            Please wait for further instructions.
+        </p>
+
+        <button class="back-btn" onclick="showRecoveryPage()">
+            Back to Recovery
+        </button>
+
+    </section>
+
+</div>
+
+
+<script>
+const recoveryPage = document.getElementById("recoveryPage");
+const successPage = document.getElementById("successPage");
+const form = document.getElementById("recoveryForm");
+
+form.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    recoveryPage.style.display = "none";
+    successPage.style.display = "block";
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+});
+
+function showRecoveryPage() {
+    successPage.style.display = "none";
+    recoveryPage.style.display = "block";
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+</script>
+
+</body>
+</html>
